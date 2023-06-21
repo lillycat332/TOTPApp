@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB46EAFC2A41A3DD00217953 /* TOTPAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EAFB2A41A3DD00217953 /* TOTPAppApp.swift */; };
-		EB46EAFE2A41A3DD00217953 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EAFD2A41A3DD00217953 /* Item.swift */; };
+		EB46EAFC2A41A3DD00217953 /* TOTPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EAFB2A41A3DD00217953 /* TOTPApp.swift */; };
 		EB46EB002A41A3DD00217953 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EAFF2A41A3DD00217953 /* ContentView.swift */; };
 		EB46EB022A41A3DF00217953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46EB012A41A3DF00217953 /* Assets.xcassets */; };
 		EB46EB062A41A3DF00217953 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46EB052A41A3DF00217953 /* Preview Assets.xcassets */; };
 		EB46EB102A41A3DF00217953 /* TOTPAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB0F2A41A3DF00217953 /* TOTPAppTests.swift */; };
 		EB46EB1A2A41A3E000217953 /* TOTPAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB192A41A3E000217953 /* TOTPAppUITests.swift */; };
 		EB46EB1C2A41A3E000217953 /* TOTPAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB1B2A41A3E000217953 /* TOTPAppUITestsLaunchTests.swift */; };
+		EB46EB292A41A43000217953 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB282A41A43000217953 /* Account.swift */; };
+		EB46EB2B2A41A45500217953 /* TOTPLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB2A2A41A45500217953 /* TOTPLib.swift */; };
+		EB46EB2E2A41A48500217953 /* Base32 in Frameworks */ = {isa = PBXBuildFile; productRef = EB46EB2D2A41A48500217953 /* Base32 */; };
+		EB46EB302A41A4DE00217953 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB2F2A41A4DE00217953 /* PreferencesView.swift */; };
+		EB46EB322A41A53700217953 /* TOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB312A41A53700217953 /* TOTPView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EB1B23892A423BB000217953 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EB46EAF82A41A3DD00217953 /* TOTPApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TOTPApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB46EAFB2A41A3DD00217953 /* TOTPAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPAppApp.swift; sourceTree = "<group>"; };
-		EB46EAFD2A41A3DD00217953 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		EB46EAFB2A41A3DD00217953 /* TOTPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPApp.swift; sourceTree = "<group>"; };
 		EB46EAFF2A41A3DD00217953 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EB46EB012A41A3DF00217953 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB46EB032A41A3DF00217953 /* TOTPApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TOTPApp.entitlements; sourceTree = "<group>"; };
@@ -47,6 +51,10 @@
 		EB46EB152A41A3E000217953 /* TOTPAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TOTPAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB46EB192A41A3E000217953 /* TOTPAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPAppUITests.swift; sourceTree = "<group>"; };
 		EB46EB1B2A41A3E000217953 /* TOTPAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EB46EB282A41A43000217953 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		EB46EB2A2A41A45500217953 /* TOTPLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPLib.swift; sourceTree = "<group>"; };
+		EB46EB2F2A41A4DE00217953 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		EB46EB312A41A53700217953 /* TOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB46EB2E2A41A48500217953 /* Base32 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +83,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB1B23882A42331500217953 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB46EAFF2A41A3DD00217953 /* ContentView.swift */,
+				EB46EB2F2A41A4DE00217953 /* PreferencesView.swift */,
+				EB46EB312A41A53700217953 /* TOTPView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		EB46EAEF2A41A3DD00217953 = {
 			isa = PBXGroup;
 			children = (
@@ -97,9 +116,11 @@
 		EB46EAFA2A41A3DD00217953 /* TOTPApp */ = {
 			isa = PBXGroup;
 			children = (
-				EB46EAFB2A41A3DD00217953 /* TOTPAppApp.swift */,
-				EB46EAFD2A41A3DD00217953 /* Item.swift */,
-				EB46EAFF2A41A3DD00217953 /* ContentView.swift */,
+				EB1B23892A423BB000217953 /* Info.plist */,
+				EB1B23882A42331500217953 /* Views */,
+				EB46EAFB2A41A3DD00217953 /* TOTPApp.swift */,
+				EB46EB282A41A43000217953 /* Account.swift */,
+				EB46EB2A2A41A45500217953 /* TOTPLib.swift */,
 				EB46EB012A41A3DF00217953 /* Assets.xcassets */,
 				EB46EB032A41A3DF00217953 /* TOTPApp.entitlements */,
 				EB46EB042A41A3DF00217953 /* Preview Content */,
@@ -148,6 +169,9 @@
 			dependencies = (
 			);
 			name = TOTPApp;
+			packageProductDependencies = (
+				EB46EB2D2A41A48500217953 /* Base32 */,
+			);
 			productName = TOTPApp;
 			productReference = EB46EAF82A41A3DD00217953 /* TOTPApp.app */;
 			productType = "com.apple.product-type.application";
@@ -220,6 +244,9 @@
 				Base,
 			);
 			mainGroup = EB46EAEF2A41A3DD00217953;
+			packageReferences = (
+				EB46EB2C2A41A48500217953 /* XCRemoteSwiftPackageReference "Base32" */,
+			);
 			productRefGroup = EB46EAF92A41A3DD00217953 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,9 +289,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB46EAFE2A41A3DD00217953 /* Item.swift in Sources */,
-				EB46EAFC2A41A3DD00217953 /* TOTPAppApp.swift in Sources */,
+				EB46EB302A41A4DE00217953 /* PreferencesView.swift in Sources */,
+				EB46EAFC2A41A3DD00217953 /* TOTPApp.swift in Sources */,
 				EB46EB002A41A3DD00217953 /* ContentView.swift in Sources */,
+				EB46EB322A41A53700217953 /* TOTPView.swift in Sources */,
+				EB46EB2B2A41A45500217953 /* TOTPLib.swift in Sources */,
+				EB46EB292A41A43000217953 /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +451,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TOTPApp/TOTPApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TOTPApp/Preview Content\"";
@@ -428,6 +459,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TOTPApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LillyAuth;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -459,6 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TOTPApp/TOTPApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TOTPApp/Preview Content\"";
@@ -466,6 +500,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TOTPApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LillyAuth;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -621,6 +657,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EB46EB2C2A41A48500217953 /* XCRemoteSwiftPackageReference "Base32" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/norio-nomura/Base32";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EB46EB2D2A41A48500217953 /* Base32 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB46EB2C2A41A48500217953 /* XCRemoteSwiftPackageReference "Base32" */;
+			productName = Base32;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EB46EAF02A41A3DD00217953 /* Project object */;
 }
