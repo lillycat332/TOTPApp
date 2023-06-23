@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB02075E2A463A4B00217953 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB02075D2A463A4B00217953 /* QRScannerView.swift */; };
 		EB46EAFC2A41A3DD00217953 /* TOTPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EAFB2A41A3DD00217953 /* TOTPApp.swift */; };
 		EB46EB002A41A3DD00217953 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EAFF2A41A3DD00217953 /* ContentView.swift */; };
 		EB46EB022A41A3DF00217953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46EB012A41A3DF00217953 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EB02075D2A463A4B00217953 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		EB1B23892A423BB000217953 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EB46EAF82A41A3DD00217953 /* TOTPApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TOTPApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB46EAFB2A41A3DD00217953 /* TOTPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPApp.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				EB46EB2F2A41A4DE00217953 /* PreferencesView.swift */,
 				EB46EB312A41A53700217953 /* TOTPView.swift */,
 				EB7BE20F2A4611D000217953 /* PINCodeView.swift */,
+				EB02075D2A463A4B00217953 /* QRScannerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				EB7BE2102A4611D000217953 /* PINCodeView.swift in Sources */,
 				EB46EB302A41A4DE00217953 /* PreferencesView.swift in Sources */,
 				EB46EAFC2A41A3DD00217953 /* TOTPApp.swift in Sources */,
+				EB02075E2A463A4B00217953 /* QRScannerView.swift in Sources */,
 				EB46EB002A41A3DD00217953 /* ContentView.swift in Sources */,
 				EB46EB322A41A53700217953 /* TOTPView.swift in Sources */,
 				EB46EB2B2A41A45500217953 /* TOTPLib.swift in Sources */,

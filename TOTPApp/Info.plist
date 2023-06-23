@@ -2,7 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To scan authenticator QR codes</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>idk</string>
+	<string>To log you into the app</string>
 </dict>
 </plist>

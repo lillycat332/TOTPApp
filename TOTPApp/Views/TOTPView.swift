@@ -76,9 +76,12 @@ struct TOTPView: View {
     }
     .padding(10)
     .onTapGesture {
-      NSPasteboard.general.clearContents() 
+#if os(macOS)
+      NSPasteboard.general.clearContents()
       NSPasteboard.general.setString(String(self.computedTotp.password), forType: .string)
-      
+#else
+      UIPasteboard.general.string = String(self.computedTotp.password)
+#endif
       Task {
         self.overlayText = "Copied!"
         try? await Task.sleep(nanoseconds: 1_000_000_000)
