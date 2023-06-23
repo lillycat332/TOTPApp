@@ -27,10 +27,13 @@ struct TOTPApp: App {
     .modelContainer(for: Account.self)
 #if os(macOS)
     .windowStyle(.hiddenTitleBar)
+    .windowToolbarStyle(.unifiedCompact(showsTitle: false))
+    .windowResizability(.contentSize)
 #endif
 #if os(macOS)
     Settings {
       PreferencesView()
+        .modelContainer(for: Account.self)
     }
 #endif
   }

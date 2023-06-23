@@ -19,6 +19,9 @@
 		EB46EB2E2A41A48500217953 /* Base32 in Frameworks */ = {isa = PBXBuildFile; productRef = EB46EB2D2A41A48500217953 /* Base32 */; };
 		EB46EB302A41A4DE00217953 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB2F2A41A4DE00217953 /* PreferencesView.swift */; };
 		EB46EB322A41A53700217953 /* TOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46EB312A41A53700217953 /* TOTPView.swift */; };
+		EB7BE20E2A460FB000217953 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7BE20D2A460FB000217953 /* Login.swift */; };
+		EB7BE2102A4611D000217953 /* PINCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7BE20F2A4611D000217953 /* PINCodeView.swift */; };
+		EB7BE2122A46217800217953 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EB7BE2112A46217800217953 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		EB46EB2A2A41A45500217953 /* TOTPLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPLib.swift; sourceTree = "<group>"; };
 		EB46EB2F2A41A4DE00217953 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		EB46EB312A41A53700217953 /* TOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPView.swift; sourceTree = "<group>"; };
+		EB7BE20D2A460FB000217953 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		EB7BE20F2A4611D000217953 /* PINCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINCodeView.swift; sourceTree = "<group>"; };
+		EB7BE2112A46217800217953 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = TOTPApp/Settings.bundle; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,7 @@
 				EB46EAFF2A41A3DD00217953 /* ContentView.swift */,
 				EB46EB2F2A41A4DE00217953 /* PreferencesView.swift */,
 				EB46EB312A41A53700217953 /* TOTPView.swift */,
+				EB7BE20F2A4611D000217953 /* PINCodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,13 +123,15 @@
 		EB46EAFA2A41A3DD00217953 /* TOTPApp */ = {
 			isa = PBXGroup;
 			children = (
-				EB1B23892A423BB000217953 /* Info.plist */,
+				EB7BE2112A46217800217953 /* Settings.bundle */,
 				EB1B23882A42331500217953 /* Views */,
 				EB46EAFB2A41A3DD00217953 /* TOTPApp.swift */,
 				EB46EB282A41A43000217953 /* Account.swift */,
 				EB46EB2A2A41A45500217953 /* TOTPLib.swift */,
+				EB7BE20D2A460FB000217953 /* Login.swift */,
 				EB46EB012A41A3DF00217953 /* Assets.xcassets */,
 				EB46EB032A41A3DF00217953 /* TOTPApp.entitlements */,
+				EB1B23892A423BB000217953 /* Info.plist */,
 				EB46EB042A41A3DF00217953 /* Preview Content */,
 			);
 			path = TOTPApp;
@@ -264,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB46EB062A41A3DF00217953 /* Preview Assets.xcassets in Resources */,
+				EB7BE2122A46217800217953 /* Settings.bundle in Resources */,
 				EB46EB022A41A3DF00217953 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +299,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB7BE20E2A460FB000217953 /* Login.swift in Sources */,
+				EB7BE2102A4611D000217953 /* PINCodeView.swift in Sources */,
 				EB46EB302A41A4DE00217953 /* PreferencesView.swift in Sources */,
 				EB46EAFC2A41A3DD00217953 /* TOTPApp.swift in Sources */,
 				EB46EB002A41A3DD00217953 /* ContentView.swift in Sources */,

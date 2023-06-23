@@ -5,25 +5,35 @@
 //  Created by Lilly Cham on 20/06/2023.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
+
+// MARK: - PreferencesView
+
+struct PreferencesView: View {
+  var body: some View {
+    TabView {
+      AccountSettingsView()
+        .tabItem {
+          Label("Accounts", systemImage: "person")
+        }
+      SecuritySettingsView()
+        .tabItem {
+          Label("Security", systemImage: "lock")
+        }
+    }
+    .frame(width: 450, height: 250)
+    .padding()
+  }
+}
+
+// MARK: - AccountSettingsView
 
 struct AccountSettingsView: View {
-  @Environment(\.modelContext) private var context
-  @State private var username: String = ""
-  @State private var displayName: String = ""
-  @State private var secret: String = ""
+  // MARK: Internal
   
   var body: some View {
     VStack {
-//      Text("Add account")
-//      TextField("Username", text: $username)
-//      TextField("Display Name", text: $displayName)
-//      TextField("Secret", text: $secret)
-//      Button(action: {
-//        let acc = Account(secret: secret, username: username, displayName: displayName)
-//        context.insert(acc)
-//      }, label: {Text("Add")})
       Button {
         let items = try? self.context.fetch(FetchDescriptor(predicate: #Predicate<Account> { _ in
           true
@@ -36,19 +46,24 @@ struct AccountSettingsView: View {
       }
     }
   }
+  
+  // MARK: Private
+  @Environment(\.modelContext) private var context
 }
 
-struct PreferencesView: View {
+// MARK: - SecuritySettingsView
+
+struct SecuritySettingsView: View {
+  // MARK: Internal
+  
   var body: some View {
-    TabView {
-      AccountSettingsView()
-        .tabItem {
-          Label("Accounts", systemImage: "person.fill")
-        }
+    VStack {
+      Toggle("Use Biometrics", isOn: $biometricsEnabled)
     }
-    .frame(width: 450, height: 250)
-    .padding()
   }
+  
+  // MARK: Private
+  @AppStorage("biometricsEnabled") private var biometricsEnabled = false
 }
 
 #Preview {

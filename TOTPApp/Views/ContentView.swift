@@ -13,13 +13,15 @@ import SwiftUI
 
 struct ContentView: View {
   // MARK: Internal
-  
+
+  @State var loginState: LoginState = .loggedOut
+
   var body: some View {
     Group {
-      if unlocked {
+      if !self.biometricsEnabled || self.loginState == .loggedIn {
         ScrollView {
           VStack {
-            ForEach(accounts, id: \.displayName) { account in
+            ForEach(self.accounts, id: \.displayName) { account in
               TOTPView(account: account, timer: self.timer)
                 .frame(maxWidth: .infinity)
                 .contextMenu {
@@ -32,102 +34,73 @@ struct ContentView: View {
             }
           }
         }
-      } else {
+      } else if self.loginState == .loggedOut {
         Text("Please use Touch ID to unlock.")
+      } else {
+        Text("Please use your PIN code to unlock")
+        // TODO: Add pincode view here
       }
-    }.onAppear(perform: authenticate)
+    }.onAppear(perform: self.authenticate)
       .toolbar {
         ToolbarItemGroup {
           Spacer()
-          Button(action: { modalOpen = !modalOpen }) {
+          Button(action: { self.modalOpen = !self.modalOpen }) {
             Image(systemName: "person.fill.badge.plus")
           }
           .tint(.blue)
-          .popover(isPresented: $modalOpen, arrowEdge: .bottom) {
-            ModalView(username: $username, displayName: $displayName, secret: $secret, modalOpen: $modalOpen)
+          .popover(isPresented: self.$modalOpen, arrowEdge: .bottom) {
+            ModalView(username: self.$username, displayName: self.$displayName, secret: self.$secret, modalOpen: self.$modalOpen)
+              .environment(\.modelContext, self.modelContext)
           }
         }
       }.toolbarBackground(.ultraThinMaterial, for: .automatic)
   }
-  
+
   func authenticate() {
+    // Early return if biometric login isn't enabled
+    guard self.biometricsEnabled else { return }
+
     let context = LAContext()
     var error: NSError?
-    
-    if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-      let reason = "unlock your TOTP codes"
-      
-      context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, _ in
-        if success {
-          unlocked = true
-        }
+
+    guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
+      print(error?.localizedDescription ?? "Can't evaluate policy")
+      // fallback to passcode.
+      self.loginState = .fallbackToPassword
+
+      return
+    }
+
+    Task {
+      do {
+        try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Unlock your 2FA codes")
+        self.loginState = .loggedIn
+      } catch {
+        print(error.localizedDescription)
+        // Fall back to a asking for username and password.
+        self.loginState = .fallbackToPassword
+
+        // TODO: Add fallback?
+        return
       }
     }
   }
-  
+
   // MARK: Private
-  
+
   @Environment(\.modelContext) private var modelContext
   @Query private var accounts: [Account]
   @State private var username: String = ""
   @State private var displayName: String = ""
   @State private var secret: String = ""
   @State private var modalOpen = false
-  @State private var unlocked = false
+  @AppStorage("biometricsEnabled") private var biometricsEnabled = false
   @State private var timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common)
     .autoconnect()
     .eraseToAnyPublisher()
 }
 
 // MARK: - ModalView
-
-// struct ContentView: View {
-//  @Environment(\.modelContext) var modelContext
-//  @Query var accounts: [Account]
-//  @State var username: String = ""
-//  @State var displayName: String = ""
-//  @State var secret: String = ""
-//  @State var modalOpen = false
-//  @State var unlocked = true
-//
-//  //    func authenticate() {
-//  //      let context = LAContext()
-//  //      var error: NSError?
-//  //
-//  //      if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-//  //        let reason = "unlock your TOTP codes"
-//  //
-//  //        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-//  //          if success {
-//  //            unlocked = true
-//  //          }
-//  //        }
-//  //      }
-//  //    }
-//
-//  var body: some View {
-//    NavigationView {
-//      ScrollView {
-//        VStack {
-//          ForEach(accounts, id: \.displayName) { account in
-//            TOTPView(account: account)
-//              .frame(maxWidth: .infinity)
-//          }
-//        }
-//      }
-//      .toolbar() {
-//        ToolbarItem(placement: .topBarTrailing) {
-//          Button(action: {modalOpen = !modalOpen}) {
-//            Image(systemName: "person.fill.badge.plus")
-//          }
-//          .popover(isPresented: $modalOpen) {
-//            ModalView(username: $username, displayName: $displayName, secret: $secret, modalOpen: $modalOpen)
-//          }
-//        }
-//      }
-//    }
-//  }
-// }
 
 struct ModalView: View {
   @Environment(\.modelContext) private var modelContext
@@ -138,13 +111,13 @@ struct ModalView: View {
   var body: some View {
     VStack {
       Text("Add account")
-      TextField("Username", text: $username)
-      TextField("Display Name", text: $displayName)
-      TextField("Secret", text: $secret)
+      TextField("Username", text: self.$username)
+      TextField("Display Name", text: self.$displayName)
+      TextField("Secret", text: self.$secret)
       Button(action: {
         let acc = Account(secret: secret, username: username, displayName: displayName)
-        modelContext.insert(acc)
-        modalOpen = !modalOpen
+        self.modelContext.insert(acc)
+        self.modalOpen = !self.modalOpen
       }) {
         Text("Add")
       }

@@ -21,13 +21,14 @@ extension TOTP: CustomStringConvertible {
   }
 }
 
-func generateHMAC(for data: Data, with keydata: Data) -> Data {
+private func generateHMAC(for data: Data, with keydata: Data) -> Data {
   let key = SymmetricKey(data: keydata)
   let code = HMAC<Insecure.SHA1>.authenticationCode(for: data, using: key)
   
   return Data(code)
 }
 
+/// Represents errors that can occur during the generation of TOTP codes.
 enum TOTPError: Error {
   case InvalidSecret
 }
