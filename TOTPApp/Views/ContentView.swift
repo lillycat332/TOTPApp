@@ -50,24 +50,36 @@ struct ContentView: View {
                 QRScannerView(result: self.$scanResult)
                   .environment(\.modelContext, self.modelContext)
                   .onChange(of: self.scanResult) {
-                    print(self.scanResult)
+                    print("here: \(self.scanResult)")
                     self.modalOpen = false
-                    // discard the result bc. we're just using map to operate over the functor
-                    _ = self.scanResult.map { xs in
+                    // discard the result bc we're just using map to work in the result functor
+                    switch self.scanResult {
+                    case let .success(xs):
                       guard let uri = URLComponents(string: xs),
-                            uri.scheme != "otpauth",
-                            uri.host != "totp" else {
+                            uri.scheme == "otpauth",
+                            uri.host == "totp" else {
+                        print("uri was bad")
                         return
                       }
                       
+                      print(uri)
+                      // awkward way to convert from a urlquery into a dictionary
+                      let secret = ((uri.queryItems ?? []).reduce(into: [:]) { params, query in
+                        params[query.name] = query.value
+                      }["secret"]!)
+                      let username = String(uri.path.split(separator: ":")[1])
+                      let displayName = String((uri.path.split(separator: ":").first?.dropFirst())!)
+                      
+                      let acc = Account(
+                        secret: secret,
+                        username: username,
+                        displayName: displayName
+                      )
+                      
                       // TODO: make this readable?
-                      self.modelContext.insert(object: Account(
-                        secret: ((uri.queryItems ?? []).reduce(into: [:]) { params, query in
-                          params[query.name] = query.value
-                        }["secret"]!),
-                        username: String(uri.path.split(separator: ":")[1]),
-                        displayName: String((uri.path.split(separator: ":").first?.dropFirst())!)
-                      ))
+                      self.modelContext.insert(object: acc)
+                    case let .failure(err):
+                      print(err)
                     }
                   }
 #endif
@@ -117,7 +129,9 @@ struct ContentView: View {
 
   @Environment(\.modelContext) private var modelContext
   @Query private var accounts: [Account]
+  #if os(iOS)
   @State private var scanResult: Result<String, ScanError> = .failure(.notScannedYet)
+  #endif
   @State private var username: String = ""
   @State private var displayName: String = ""
   @State private var secret: String = ""

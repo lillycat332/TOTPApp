@@ -79,7 +79,6 @@ struct QRScannerView: UIViewControllerRepresentable {
       if let _result = metadataObject.stringValue,
          metadataObject.type == AVMetadataObject.ObjectType.qr {
            self.result = .success(_result)
-           print(self.result)
       }
     }
   }

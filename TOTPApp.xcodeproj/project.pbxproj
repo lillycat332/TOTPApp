@@ -63,6 +63,7 @@
 		EB7BE20D2A460FB000217953 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		EB7BE20F2A4611D000217953 /* PINCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINCodeView.swift; sourceTree = "<group>"; };
 		EB7BE2112A46217800217953 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = TOTPApp/Settings.bundle; sourceTree = SOURCE_ROOT; };
+		EBAD71B32A465D7C00217953 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +107,7 @@
 		EB46EAEF2A41A3DD00217953 = {
 			isa = PBXGroup;
 			children = (
+				EBAD71B32A465D7C00217953 /* README.md */,
 				EB46EAFA2A41A3DD00217953 /* TOTPApp */,
 				EB46EB0E2A41A3DF00217953 /* TOTPAppTests */,
 				EB46EB182A41A3E000217953 /* TOTPAppUITests */,
