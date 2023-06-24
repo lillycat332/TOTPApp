@@ -8,10 +8,11 @@
 import Combine
 import SwiftUI
 
+// Display a TOTP code and it's remaining time duration.
 struct TOTPView: View {
   // MARK: Lifecycle
 
-  init(account: Account, timer: AnyPublisher<Date, Never>) {
+  init(account: Account, timer: AnyPublisher<Date, Never>, timeRemaining: Binding<Int>) {
     self.account = account
     let newTotp = totp(time: Date().timeIntervalSince1970, secret: account.secret)
     switch newTotp {
@@ -22,12 +23,14 @@ struct TOTPView: View {
       self.errorOccured = .InvalidSecret
     }
     self.timer = timer
+    self._timeRemaining = timeRemaining
   }
   
   // MARK: Internal
 
   let account: Account
   let timer: AnyPublisher<Date, Never>
+  @Binding var timeRemaining: Int
   @State var computedTotp: TOTP
   @State var errorOccured: TOTPError? = .none
   @State var text = ""

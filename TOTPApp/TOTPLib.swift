@@ -60,6 +60,7 @@ func totp(time: TimeInterval, secret: String, period: Double = 30.0) -> Result<T
   return .success(TOTP(password: Int((shortHash & 0x7FFFFFFF) % 1000000), generatedAt: time))
 }
 
+/// Calculate the remaining time on a TOTP code given a start time.
 func totpTimeRemaining(startTime: TimeInterval, period: Double) -> Int {
   let calendar = Calendar.current
   let date = Date()

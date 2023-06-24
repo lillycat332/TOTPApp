@@ -21,12 +21,13 @@ struct ContentView: View {
       if !self.biometricsEnabled || self.loginState == .loggedIn {
         ScrollView {
           VStack {
-            ForEach(self.accounts, id: \.displayName) { account in
-              TOTPView(account: account, timer: self.timer)
+            ForEach(self.searchResults, id: \.displayName) { account in
+              TOTPView(account: account, timer: self.timer, timeRemaining: self.$timeRemaining)
                 .frame(maxWidth: .infinity)
                 .contextMenu {
                   Button {
                     self.modelContext.delete(account)
+                    try! self.modelContext.save()
                   } label: {
                     Text("Delete")
                   }
@@ -50,7 +51,6 @@ struct ContentView: View {
                 QRScannerView(result: self.$scanResult)
                   .environment(\.modelContext, self.modelContext)
                   .onChange(of: self.scanResult) {
-                    print("here: \(self.scanResult)")
                     self.modalOpen = false
                     // discard the result bc we're just using map to work in the result functor
                     switch self.scanResult {
@@ -62,7 +62,6 @@ struct ContentView: View {
                         return
                       }
                       
-                      print(uri)
                       // awkward way to convert from a urlquery into a dictionary
                       let secret = ((uri.queryItems ?? []).reduce(into: [:]) { params, query in
                         params[query.name] = query.value
@@ -92,7 +91,12 @@ struct ContentView: View {
         Text("Please use your PIN code to unlock")
         // TODO: Add pincode view here
       }
-    }.onAppear(perform: self.authenticate)
+    }
+    .searchable(text: self.$searchQuery)
+    .onAppear(perform: self.authenticate)
+    .onReceive(timer) { _ in
+      self.timeRemaining = totpTimeRemaining(startTime: Date().timeIntervalSince1970, period: 30)
+    }
   }
 
   func authenticate() {
@@ -135,35 +139,52 @@ struct ContentView: View {
   @State private var username: String = ""
   @State private var displayName: String = ""
   @State private var secret: String = ""
+  @State private var searchQuery: String = ""
   @State private var modalOpen = false
   @AppStorage("biometricsEnabled") private var biometricsEnabled = false
   @State private var timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common)
     .autoconnect()
     .eraseToAnyPublisher()
+  @State var timeRemaining = totpTimeRemaining(startTime: Date().timeIntervalSince1970, period: 30)
+  var searchResults: [Account] {
+    if self.searchQuery.isEmpty {
+      return self.accounts
+    } else {
+      return self.accounts.filter { acc in
+        // match the case of query and names then compare them, includes both issuer and user name.
+        acc.displayName.lowercased().contains(searchQuery.lowercased()) ||
+        acc.username.lowercased().contains(searchQuery.lowercased())
+      }
+    }
+  }
 }
 
 // MARK: - ModalView
 
 struct ModalView: View {
+  
+  func submit() {
+    let acc = Account(secret: secret, username: username, displayName: displayName)
+    self.modelContext.insert(acc)
+    self.modalOpen = !self.modalOpen
+  }
   @Environment(\.modelContext) private var modelContext
   @Binding var username: String
   @Binding var displayName: String
   @Binding var secret: String
   @Binding var modalOpen: Bool
   var body: some View {
-    VStack {
-      Text("Add account")
-      TextField("Username", text: self.$username)
-      TextField("Display Name", text: self.$displayName)
-      TextField("Secret", text: self.$secret)
-      Button(action: {
-        let acc = Account(secret: secret, username: username, displayName: displayName)
-        self.modelContext.insert(acc)
-        self.modalOpen = !self.modalOpen
-      }) {
-        Text("Add")
+    Form {
+      Section(header: Text("Add account").bold()) {
+        TextField("Username", text: self.$username)
+        TextField("Display Name", text: self.$displayName)
+        TextField("Secret", text: self.$secret)
+        Button(action: submit) {
+          Text("Add")
+        }
       }
     }
+    .onSubmit(submit)
     .padding()
   }
 }

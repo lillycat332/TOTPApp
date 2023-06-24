@@ -31,12 +31,14 @@ struct PreferencesView: View {
 
 struct AccountSettingsView: View {
   // MARK: Internal
-  
+
   var body: some View {
     VStack {
       Button {
         let items = try? self.context.fetch(FetchDescriptor(predicate: #Predicate<Account> { _ in
-          true
+          // This is necessary because the predicate macro is broken in Xcode 15β
+          // meaning that we need to use an expression evaluating instead of the value true.
+          1 == 1
         }))
         items.map { accounts in
           accounts.forEach { account in self.context.delete(account) }
@@ -46,8 +48,9 @@ struct AccountSettingsView: View {
       }
     }
   }
-  
+
   // MARK: Private
+
   @Environment(\.modelContext) private var context
 }
 
@@ -55,14 +58,15 @@ struct AccountSettingsView: View {
 
 struct SecuritySettingsView: View {
   // MARK: Internal
-  
+
   var body: some View {
     VStack {
       Toggle("Use Biometrics", isOn: $biometricsEnabled)
     }
   }
-  
+
   // MARK: Private
+
   @AppStorage("biometricsEnabled") private var biometricsEnabled = false
 }
 
